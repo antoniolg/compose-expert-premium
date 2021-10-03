@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.mymovies.databinding.ActivityMainBinding
 import com.antonioleiva.mymovies.ui.common.PermissionRequester
 import com.antonioleiva.mymovies.ui.common.startActivity
@@ -13,6 +14,7 @@ import com.antonioleiva.mymovies.ui.detail.DetailActivity
 import com.antonioleiva.mymovies.ui.main.MainViewModel.UiModel
 import dagger.hilt.android.AndroidEntryPoint
 
+@ExperimentalCoilApi
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
