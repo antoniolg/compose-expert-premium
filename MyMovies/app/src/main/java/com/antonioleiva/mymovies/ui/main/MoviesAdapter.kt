@@ -1,15 +1,15 @@
 package com.antonioleiva.mymovies.ui.main
 
 import android.view.ViewGroup
-import androidx.compose.foundation.clickable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.viewinterop.AndroidViewBinding
 import androidx.recyclerview.widget.RecyclerView
 import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.domain.Movie
+import com.antonioleiva.mymovies.databinding.ViewMovieBinding
 import com.antonioleiva.mymovies.ui.common.basicDiffUtil
-import com.google.android.material.composethemeadapter.MdcTheme
+import com.antonioleiva.mymovies.ui.common.loadUrl
 
 @ExperimentalCoilApi
 class MoviesAdapter(private val listener: (Movie) -> Unit) :
@@ -46,12 +46,14 @@ class MoviesAdapter(private val listener: (Movie) -> Unit) :
 
         fun bind(movie: Movie) {
             composeView.setContent {
-                MdcTheme {
-                    MovieViewItem(
-                        movie = movie,
-                        modifier = Modifier.clickable { listener(movie) }
-                    )
-                }
+                AndroidViewBinding(
+                    factory = ViewMovieBinding::inflate,
+                    update = {
+                        movieTitle.text = movie.title
+                        movieCover.loadUrl("https://image.tmdb.org/t/p/w185/${movie.posterPath}")
+                        root.setOnClickListener { listener(movie) }
+                    }
+                )
             }
         }
     }
