@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.domain.Movie
 import com.antonioleiva.mymovies.ui.common.basicDiffUtil
+import com.google.accompanist.appcompattheme.AppCompatTheme
 
 @ExperimentalCoilApi
 class MoviesAdapter(private val listener: (Movie) -> Unit) :
@@ -45,10 +46,12 @@ class MoviesAdapter(private val listener: (Movie) -> Unit) :
 
         fun bind(movie: Movie) {
             composeView.setContent {
-                MovieViewItem(
-                    movie = movie,
-                    modifier = Modifier.clickable { listener(movie) }
-                )
+                AppCompatTheme {
+                    MovieViewItem(
+                        movie = movie,
+                        modifier = Modifier.clickable { listener(movie) }
+                    )
+                }
             }
         }
     }
