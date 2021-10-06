@@ -19,3 +19,14 @@ buildscript {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+def getProps(String propName) {
+    def propsFile = rootProject.file('local.properties')
+    if (propsFile.exists()) {
+        def props = new Properties()
+        props.load(new FileInputStream(propsFile))
+        return props[propName]
+    } else {
+        return "";
+    }
+}
