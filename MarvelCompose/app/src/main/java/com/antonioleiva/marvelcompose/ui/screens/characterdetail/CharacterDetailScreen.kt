@@ -20,11 +20,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.antonioleiva.marvelcompose.MarvelApp
 import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.CharactersRepository
 import com.antonioleiva.marvelcompose.data.entities.Character
@@ -35,7 +33,7 @@ import com.antonioleiva.marvelcompose.ui.navigation.ArrowBackIcon
 @ExperimentalMaterialApi
 @Composable
 fun CharacterDetailScreen(characterId: Int, onUpClick: () -> Unit) {
-    var characterState by remember() { mutableStateOf<Character?>(null) }
+    var characterState by remember { mutableStateOf<Character?>(null) }
     LaunchedEffect(Unit) {
         characterState = CharactersRepository.findCharacter(characterId)
     }
@@ -48,11 +46,13 @@ fun CharacterDetailScreen(characterId: Int, onUpClick: () -> Unit) {
 @ExperimentalMaterialApi
 @Composable
 fun CharacterDetailScreen(character: Character, onUpClick: () -> Unit) {
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text(character.name) },
-                navigationIcon = { ArrowBackIcon(onUpClick) }
+                navigationIcon = { ArrowBackIcon(onUpClick) },
+                actions = { AppBarOverflowMenu(character.urls) }
             )
         }
     ) { padding ->
@@ -122,26 +122,5 @@ private fun Header(character: Character) {
             modifier = Modifier.padding(16.dp, 0.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
-    }
-}
-
-@ExperimentalCoilApi
-@ExperimentalMaterialApi
-@Preview(widthDp = 393, heightDp = 851)
-@Composable
-fun CharacterDetailScreenPreview() {
-    val c = Character(
-        1,
-        "Iron Man",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat dolor ut leo egestas molestie. Nam aliquet varius enim, vel placerat arcu bibendum ac. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam eu ultricies augue. Donec nulla orci, commodo nec dui nec, congue molestie mauris. Nulla ac nulla vel nulla auctor cursus. Praesent dui enim, aliquet at lacinia in, porttitor vitae mi. Phasellus lobortis mauris nec sapien luctus, placerat molestie leo condimentum. Sed eu nibh at tellus auctor vulputate ullamcorper et risus. Phasellus elementum magna in nisl mattis pellentesque. Pellentesque vel erat a urna pharetra auctor. Etiam molestie sit amet dolor nec accumsan. Fusce non quam cursus, venenatis risus at, euismod nisi. Nullam finibus, orci sit amet bibendum maximus, metus augue dictum ipsum, quis hendrerit nulla metus ac ante.",
-        "",
-        listOf(Reference("Comic 1"), Reference("Comic 2")),
-        listOf(Reference("Comic 1"), Reference("Comic 2")),
-        listOf(Reference("Comic 1"), Reference("Comic 2")),
-        listOf(Reference("Comic 1"), Reference("Comic 2"))
-    )
-
-    MarvelApp {
-        CharacterDetailScreen(character = c, onUpClick = {})
     }
 }
