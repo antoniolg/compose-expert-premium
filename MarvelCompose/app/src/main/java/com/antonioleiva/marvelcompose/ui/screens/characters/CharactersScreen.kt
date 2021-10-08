@@ -8,17 +8,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.CharactersRepository
 import com.antonioleiva.marvelcompose.data.entities.Character
 
@@ -37,15 +37,24 @@ fun CharactersScreen(onClick: (Character) -> Unit) {
 @ExperimentalFoundationApi
 @Composable
 fun CharactersScreen(characters: List<Character>, onClick: (Character) -> Unit) {
-    LazyVerticalGrid(
-        cells = GridCells.Adaptive(180.dp),
-        contentPadding = PaddingValues(4.dp)
-    ) {
-        items(characters) {
-            CharacterItem(
-                character = it,
-                modifier = Modifier.clickable { onClick(it) }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(stringResource(R.string.app_name)) }
             )
+        }
+    ) { padding ->
+        LazyVerticalGrid(
+            cells = GridCells.Adaptive(180.dp),
+            contentPadding = PaddingValues(4.dp),
+            modifier = Modifier.padding(padding)
+        ) {
+            items(characters) {
+                CharacterItem(
+                    character = it,
+                    modifier = Modifier.clickable { onClick(it) }
+                )
+            }
         }
     }
 }

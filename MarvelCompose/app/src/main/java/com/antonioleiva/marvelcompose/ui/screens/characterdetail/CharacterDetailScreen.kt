@@ -29,34 +29,46 @@ import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.CharactersRepository
 import com.antonioleiva.marvelcompose.data.entities.Character
 import com.antonioleiva.marvelcompose.data.entities.Reference
+import com.antonioleiva.marvelcompose.ui.navigation.ArrowBackIcon
 
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
-fun CharacterDetailScreen(characterId: Int) {
+fun CharacterDetailScreen(characterId: Int, onUpClick: () -> Unit) {
     var characterState by remember() { mutableStateOf<Character?>(null) }
     LaunchedEffect(Unit) {
         characterState = CharactersRepository.findCharacter(characterId)
     }
     characterState?.let {
-        CharacterDetailScreen(it)
+        CharacterDetailScreen(it, onUpClick)
     }
 }
 
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
-fun CharacterDetailScreen(character: Character) {
-    LazyColumn(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        item {
-            Header(character)
+fun CharacterDetailScreen(character: Character, onUpClick: () -> Unit) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(character.name) },
+                navigationIcon = { ArrowBackIcon(onUpClick) }
+            )
         }
-        section(Icons.Default.Collections, R.string.series, character.series)
-        section(Icons.Default.Event, R.string.events, character.events)
-        section(Icons.Default.Book, R.string.comics, character.comics)
-        section(Icons.Default.Bookmark, R.string.stories, character.stories)
+    ) { padding ->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(padding)
+        ) {
+            item {
+                Header(character)
+            }
+            section(Icons.Default.Collections, R.string.series, character.series)
+            section(Icons.Default.Event, R.string.events, character.events)
+            section(Icons.Default.Book, R.string.comics, character.comics)
+            section(Icons.Default.Bookmark, R.string.stories, character.stories)
+        }
     }
 }
 
@@ -130,6 +142,6 @@ fun CharacterDetailScreenPreview() {
     )
 
     MarvelApp {
-        CharacterDetailScreen(character = c)
+        CharacterDetailScreen(character = c, onUpClick = {})
     }
 }
