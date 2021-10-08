@@ -3,6 +3,7 @@ package com.antonioleiva.marvelcompose.ui.screens.characters
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -11,6 +12,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -23,34 +25,36 @@ import com.antonioleiva.marvelcompose.data.entities.Character
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
-fun CharactersScreen() {
-    var charactersState by remember { mutableStateOf(emptyList<Character>()) }
+fun CharactersScreen(onClick: (Character) -> Unit) {
+    var charactersState by rememberSaveable() { mutableStateOf(emptyList<Character>()) }
     LaunchedEffect(Unit) {
-        val charactersRepository = CharactersRepository()
-        charactersState = charactersRepository.getCharacters()
+        charactersState = CharactersRepository.getCharacters()
     }
-    CharactersScreen(charactersState)
+    CharactersScreen(charactersState, onClick)
 }
 
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
-fun CharactersScreen(characters: List<Character>) {
+fun CharactersScreen(characters: List<Character>, onClick: (Character) -> Unit) {
     LazyVerticalGrid(
         cells = GridCells.Adaptive(180.dp),
         contentPadding = PaddingValues(4.dp)
     ) {
         items(characters) {
-            CharacterItem(it)
+            CharacterItem(
+                character = it,
+                modifier = Modifier.clickable { onClick(it) }
+            )
         }
     }
 }
 
 @ExperimentalCoilApi
 @Composable
-fun CharacterItem(character: Character) {
+fun CharacterItem(character: Character, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier.padding(8.dp)
+        modifier = modifier.padding(8.dp)
     ) {
         Card {
             Image(

@@ -5,4 +5,8 @@ data class Character(
     val name: String,
     val description: String,
     val thumbnail: String,
+    val comics: List<Reference>,
+    val events: List<Reference>,
+    val series: List<Reference>,
+    val stories: List<Reference>,
 )
