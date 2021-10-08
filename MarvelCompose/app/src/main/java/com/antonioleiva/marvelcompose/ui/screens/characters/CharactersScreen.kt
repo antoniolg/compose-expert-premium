@@ -26,7 +26,7 @@ import com.antonioleiva.marvelcompose.data.entities.Character
 @ExperimentalFoundationApi
 @Composable
 fun CharactersScreen(onClick: (Character) -> Unit) {
-    var charactersState by rememberSaveable() { mutableStateOf(emptyList<Character>()) }
+    var charactersState by remember() { mutableStateOf(emptyList<Character>()) }
     LaunchedEffect(Unit) {
         charactersState = CharactersRepository.getCharacters()
     }
