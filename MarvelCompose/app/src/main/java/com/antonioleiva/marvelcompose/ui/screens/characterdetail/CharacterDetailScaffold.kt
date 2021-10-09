@@ -30,10 +30,12 @@ fun CharacterDetailScaffold(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = { shareCharacter(context, character) }
-            ) {
-                Icon(imageVector = Icons.Default.Share, contentDescription = null)
+            if (character.urls.isNotEmpty()) {
+                FloatingActionButton(
+                    onClick = { shareCharacter(context, character) }
+                ) {
+                    Icon(imageVector = Icons.Default.Share, contentDescription = null)
+                }
             }
         },
         floatingActionButtonPosition = FabPosition.Center,

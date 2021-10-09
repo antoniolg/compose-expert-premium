@@ -10,9 +10,10 @@ import com.antonioleiva.marvelcompose.data.entities.Url
 @ExperimentalMaterialApi
 @Composable
 fun AppBarOverflowMenu(urls: List<Url>) {
+    if (urls.isEmpty()) return
+
     var showMenu by remember { mutableStateOf(false) }
     val uriHandler = LocalUriHandler.current
-
 
     IconButton(onClick = { showMenu = !showMenu }) {
         Icon(
