@@ -2,13 +2,19 @@ package com.antonioleiva.marvelcompose.ui.screens.characterdetail
 
 import android.content.Context
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ShareCompat
 import com.antonioleiva.marvelcompose.data.entities.Character
+import com.antonioleiva.marvelcompose.ui.navigation.AppBarIcon
 import com.antonioleiva.marvelcompose.ui.navigation.ArrowBackIcon
 
 @ExperimentalMaterialApi
@@ -39,6 +45,16 @@ fun CharacterDetailScaffold(
             }
         },
         floatingActionButtonPosition = FabPosition.Center,
+        isFloatingActionButtonDocked = true,
+        bottomBar = {
+            BottomAppBar(
+                cutoutShape = CircleShape
+            ) {
+                AppBarIcon(imageVector = Icons.Default.Menu, onClick = { })
+                Spacer(modifier = Modifier.weight(1f))
+                AppBarIcon(imageVector = Icons.Default.Favorite, onClick = { })
+            }
+        },
         content = content
     )
 }
