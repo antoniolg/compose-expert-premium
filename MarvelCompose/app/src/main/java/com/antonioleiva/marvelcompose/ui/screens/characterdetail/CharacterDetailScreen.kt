@@ -27,7 +27,6 @@ import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.CharactersRepository
 import com.antonioleiva.marvelcompose.data.entities.Character
 import com.antonioleiva.marvelcompose.data.entities.Reference
-import com.antonioleiva.marvelcompose.ui.navigation.ArrowBackIcon
 
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
@@ -46,15 +45,9 @@ fun CharacterDetailScreen(characterId: Int, onUpClick: () -> Unit) {
 @ExperimentalMaterialApi
 @Composable
 fun CharacterDetailScreen(character: Character, onUpClick: () -> Unit) {
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(character.name) },
-                navigationIcon = { ArrowBackIcon(onUpClick) },
-                actions = { AppBarOverflowMenu(character.urls) }
-            )
-        }
+    CharacterDetailScaffold(
+        character = character,
+        onUpClick = onUpClick
     ) { padding ->
         LazyColumn(
             modifier = Modifier
