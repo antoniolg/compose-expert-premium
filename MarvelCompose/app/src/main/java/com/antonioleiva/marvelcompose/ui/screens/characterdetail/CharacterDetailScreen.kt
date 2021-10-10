@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.antonioleiva.marvelcompose.R
-import com.antonioleiva.marvelcompose.data.CharactersRepository
 import com.antonioleiva.marvelcompose.data.entities.Character
 import com.antonioleiva.marvelcompose.data.entities.Reference
+import com.antonioleiva.marvelcompose.data.repositories.CharactersRepository
 
 @ExperimentalCoilApi
 @ExperimentalMaterialApi

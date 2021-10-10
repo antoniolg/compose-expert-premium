@@ -1,4 +1,4 @@
-package com.antonioleiva.marvelcompose.data
+package com.antonioleiva.marvelcompose.data.repositories
 
 import com.antonioleiva.marvelcompose.data.entities.Character
 import com.antonioleiva.marvelcompose.data.entities.Reference

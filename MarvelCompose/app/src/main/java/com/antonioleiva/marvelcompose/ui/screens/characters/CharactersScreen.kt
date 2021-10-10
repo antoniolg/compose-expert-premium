@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -19,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.antonioleiva.marvelcompose.R
-import com.antonioleiva.marvelcompose.data.CharactersRepository
 import com.antonioleiva.marvelcompose.data.entities.Character
+import com.antonioleiva.marvelcompose.data.repositories.CharactersRepository
 
 @ExperimentalCoilApi
 @ExperimentalFoundationApi

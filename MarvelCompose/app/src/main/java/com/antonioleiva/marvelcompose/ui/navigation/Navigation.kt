@@ -9,6 +9,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.marvelcompose.ui.screens.characterdetail.CharacterDetailScreen
 import com.antonioleiva.marvelcompose.ui.screens.characters.CharactersScreen
@@ -22,7 +23,7 @@ fun Navigation() {
 
     NavHost(
         navController = navController,
-        startDestination = NavItem.Characters.route
+        startDestination = Feature.CHARACTERS.route
     ) {
         charactersNav(navController)
     }
@@ -32,23 +33,28 @@ fun Navigation() {
 @ExperimentalMaterialApi
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
-private fun NavGraphBuilder.charactersNav(
-    navController: NavController
-) {
-    composable(NavItem.Characters) {
-        CharactersScreen(
-            onClick = { character ->
-                navController.navigate(NavItem.CharacterDetail.createRoute(character.id))
-            }
-        )
-    }
+private fun NavGraphBuilder.charactersNav(navController: NavController) {
+    navigation(
+        startDestination = NavItem.ContentType(Feature.CHARACTERS).route,
+        route = Feature.CHARACTERS.route
+    ) {
+        composable(NavItem.ContentType(Feature.CHARACTERS)) {
+            CharactersScreen(
+                onClick = { character ->
+                    navController.navigate(
+                        NavItem.ContentTypeDetail(Feature.CHARACTERS).createRoute(character.id)
+                    )
+                }
+            )
+        }
 
-    composable(NavItem.CharacterDetail) {
-        val id = it.findArg<Int>(NavArg.ItemId)
-        CharacterDetailScreen(
-            characterId = id,
-            onUpClick = { navController.popBackStack() }
-        )
+        composable(NavItem.ContentTypeDetail(Feature.CHARACTERS)) {
+            val id = it.findArg<Int>(NavArg.ItemId)
+            CharacterDetailScreen(
+                characterId = id,
+                onUpClick = { navController.popBackStack() }
+            )
+        }
     }
 }
 
