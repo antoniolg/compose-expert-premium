@@ -27,7 +27,7 @@ import com.antonioleiva.marvelcompose.data.repositories.CharactersRepository
 fun CharactersScreen(onClick: (Character) -> Unit) {
     var charactersState by remember() { mutableStateOf(emptyList<Character>()) }
     LaunchedEffect(Unit) {
-        charactersState = CharactersRepository.getCharacters()
+        charactersState = CharactersRepository.get()
     }
     CharactersScreen(charactersState, onClick)
 }

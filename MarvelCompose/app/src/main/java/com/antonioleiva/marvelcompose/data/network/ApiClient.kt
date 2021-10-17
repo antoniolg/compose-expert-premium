@@ -29,6 +29,7 @@ object ApiClient {
         .build()
 
     val charactersService: CharactersService = restAdapter.create(CharactersService::class.java)
+    val comicsService: ComicsService = restAdapter.create(ComicsService::class.java)
 }
 
 private class QueryInterceptor : Interceptor {

@@ -1,8 +1,8 @@
 package com.antonioleiva.marvelcompose.data.network.entities
 
-data class ApiComicsList(
+data class ApiReferenceList(
     val available: Int,
     val collectionURI: String,
-    val items: List<ApiComic>,
+    val items: List<ApiReference>?,
     val returned: Int
 )

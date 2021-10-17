@@ -34,7 +34,7 @@ import com.antonioleiva.marvelcompose.data.repositories.CharactersRepository
 fun CharacterDetailScreen(characterId: Int, onUpClick: () -> Unit) {
     var characterState by remember { mutableStateOf<Character?>(null) }
     LaunchedEffect(Unit) {
-        characterState = CharactersRepository.findCharacter(characterId)
+        characterState = CharactersRepository.find(characterId)
     }
     characterState?.let {
         CharacterDetailScreen(it, onUpClick)
