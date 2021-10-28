@@ -13,14 +13,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ShareCompat
-import com.antonioleiva.marvelcompose.data.entities.Character
+import com.antonioleiva.marvelcompose.data.entities.MarvelItem
+import com.antonioleiva.marvelcompose.data.entities.Url
 import com.antonioleiva.marvelcompose.ui.navigation.AppBarIcon
 import com.antonioleiva.marvelcompose.ui.navigation.ArrowBackIcon
 
 @ExperimentalMaterialApi
 @Composable
-fun CharacterDetailScaffold(
-    character: Character,
+fun MarvelItemDetailScaffold(
+    marvelItem: MarvelItem,
     onUpClick: () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ) {
@@ -29,16 +30,16 @@ fun CharacterDetailScaffold(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(character.name) },
+                title = { Text(marvelItem.title) },
                 navigationIcon = { ArrowBackIcon(onUpClick) },
-                actions = { AppBarOverflowMenu(character.urls) }
+                actions = { AppBarOverflowMenu(marvelItem.urls) }
 
             )
         },
         floatingActionButton = {
-            if (character.urls.isNotEmpty()) {
+            if (marvelItem.urls.isNotEmpty()) {
                 FloatingActionButton(
-                    onClick = { shareCharacter(context, character) }
+                    onClick = { shareCharacter(context, marvelItem.title, marvelItem.urls.first()) }
                 ) {
                     Icon(imageVector = Icons.Default.Share, contentDescription = null)
                 }
@@ -59,12 +60,12 @@ fun CharacterDetailScaffold(
     )
 }
 
-private fun shareCharacter(context: Context, character: Character) {
+private fun shareCharacter(context: Context, name: String, url: Url) {
     val intent = ShareCompat
         .IntentBuilder(context)
         .setType("text/plain")
-        .setSubject(character.name)
-        .setText(character.urls.first().url)
+        .setSubject(name)
+        .setText(url.destination)
         .intent
     context.startActivity(intent)
 }

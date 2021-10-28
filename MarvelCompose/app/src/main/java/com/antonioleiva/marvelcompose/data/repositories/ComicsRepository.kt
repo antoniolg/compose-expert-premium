@@ -15,7 +15,7 @@ object ComicsRepository : Repository<Comic>() {
     }
 
     suspend fun find(id: Int): Comic = super.find(
-        findActionLocal = { it.id == id },
+        id = id,
         findActionRemote = {
             ApiClient
                 .comicsService

@@ -26,7 +26,7 @@ fun AppBarOverflowMenu(urls: List<Url>) {
         ) {
             urls.forEach {
                 DropdownMenuItem(onClick = {
-                    uriHandler.openUri(it.url)
+                    uriHandler.openUri(it.destination)
                     showMenu = false
                 }) {
                     ListItem(text = { Text(it.type) })

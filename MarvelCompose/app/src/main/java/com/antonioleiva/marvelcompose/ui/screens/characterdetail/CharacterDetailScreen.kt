@@ -9,10 +9,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Book
-import androidx.compose.material.icons.filled.Bookmark
-import androidx.compose.material.icons.filled.Collections
-import androidx.compose.material.icons.filled.Event
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,28 +22,33 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.entities.Character
+import com.antonioleiva.marvelcompose.data.entities.MarvelItem
 import com.antonioleiva.marvelcompose.data.entities.Reference
+import com.antonioleiva.marvelcompose.data.entities.ReferenceList
 import com.antonioleiva.marvelcompose.data.repositories.CharactersRepository
 
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
-fun CharacterDetailScreen(characterId: Int, onUpClick: () -> Unit) {
+fun MarvelItemDetailScreen(characterId: Int, onUpClick: () -> Unit) {
     var characterState by remember { mutableStateOf<Character?>(null) }
     LaunchedEffect(Unit) {
         characterState = CharactersRepository.find(characterId)
     }
     characterState?.let {
-        CharacterDetailScreen(it, onUpClick)
+        MarvelItemDetailScreen(it, onUpClick)
     }
 }
 
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
-fun CharacterDetailScreen(character: Character, onUpClick: () -> Unit) {
-    CharacterDetailScaffold(
-        character = character,
+fun MarvelItemDetailScreen(
+    marvelItem: MarvelItem,
+    onUpClick: () -> Unit
+) {
+    MarvelItemDetailScaffold(
+        marvelItem = marvelItem,
         onUpClick = onUpClick
     ) { padding ->
         LazyColumn(
@@ -55,13 +57,47 @@ fun CharacterDetailScreen(character: Character, onUpClick: () -> Unit) {
                 .padding(padding)
         ) {
             item {
-                Header(character)
+                Header(marvelItem = marvelItem)
             }
-            section(Icons.Default.Collections, R.string.series, character.series)
-            section(Icons.Default.Event, R.string.events, character.events)
-            section(Icons.Default.Book, R.string.comics, character.comics)
-            section(Icons.Default.Bookmark, R.string.stories, character.stories)
+            marvelItem.references.forEach {
+                val (icon, @StringRes stringRes) = it.type.createUiData()
+                section(icon, stringRes, it.references)
+            }
         }
+    }
+}
+
+@ExperimentalCoilApi
+@Composable
+private fun Header(marvelItem: MarvelItem) {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Image(
+            painter = rememberImagePainter(marvelItem.thumbnail),
+            contentDescription = marvelItem.title,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.LightGray)
+                .aspectRatio(1f)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = marvelItem.title,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.h4,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp, 0.dp)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = marvelItem.description,
+            style = MaterialTheme.typography.body1,
+            modifier = Modifier.padding(16.dp, 0.dp)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
@@ -84,36 +120,10 @@ private fun LazyListScope.section(icon: ImageVector, @StringRes name: Int, items
     }
 }
 
-@ExperimentalCoilApi
-@Composable
-private fun Header(character: Character) {
-    Column(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Image(
-            painter = rememberImagePainter(character.thumbnail),
-            contentDescription = character.name,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.LightGray)
-                .aspectRatio(1f)
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = character.name,
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.h4,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp, 0.dp)
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = character.description,
-            style = MaterialTheme.typography.body1,
-            modifier = Modifier.padding(16.dp, 0.dp)
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-    }
+private fun ReferenceList.Type.createUiData(): Pair<ImageVector, Int> = when (this) {
+    ReferenceList.Type.CHARACTER -> Icons.Default.Person to R.string.characters
+    ReferenceList.Type.COMIC -> Icons.Default.Book to R.string.comics
+    ReferenceList.Type.STORY -> Icons.Default.Bookmark to R.string.stories
+    ReferenceList.Type.EVENT -> Icons.Default.Event to R.string.events
+    ReferenceList.Type.SERIES -> Icons.Default.Collections to R.string.series
 }

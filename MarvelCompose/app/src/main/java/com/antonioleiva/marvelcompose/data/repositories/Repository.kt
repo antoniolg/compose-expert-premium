@@ -1,6 +1,8 @@
 package com.antonioleiva.marvelcompose.data.repositories
 
-abstract class Repository<T> {
+import com.antonioleiva.marvelcompose.data.entities.MarvelItem
+
+abstract class Repository<T : MarvelItem> {
 
     private var cache: List<T> = emptyList()
 
@@ -12,10 +14,10 @@ abstract class Repository<T> {
     }
 
     internal suspend fun find(
-        findActionLocal: (T) -> Boolean,
+        id: Int,
         findActionRemote: suspend () -> T
     ): T {
-        val character = cache.find { findActionLocal(it) }
+        val character = cache.find { it.id == id }
         if (character != null) return character
 
         return findActionRemote()

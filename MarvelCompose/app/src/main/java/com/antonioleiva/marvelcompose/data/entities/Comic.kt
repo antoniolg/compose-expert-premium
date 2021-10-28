@@ -1,17 +1,14 @@
 package com.antonioleiva.marvelcompose.data.entities
 
 data class Comic(
-    val id: Int,
-    val title: String,
-    val description: String,
-    val thumbnail: String,
+    override val id: Int,
+    override val title: String,
+    override val description: String,
+    override val thumbnail: String,
     val format: Format,
-    val characters: List<Reference>,
-    val events: List<Reference>,
-    val series: List<Reference>,
-    val stories: List<Reference>,
-    val urls: List<Url>
-) {
+    override val references: List<ReferenceList>,
+    override val urls: List<Url>
+) : MarvelItem {
     enum class Format {
         COMIC,
         MAGAZINE,

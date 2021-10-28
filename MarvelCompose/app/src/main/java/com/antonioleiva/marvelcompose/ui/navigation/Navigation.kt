@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import coil.annotation.ExperimentalCoilApi
-import com.antonioleiva.marvelcompose.ui.screens.characterdetail.CharacterDetailScreen
+import com.antonioleiva.marvelcompose.ui.screens.characterdetail.MarvelItemDetailScreen
 import com.antonioleiva.marvelcompose.ui.screens.characters.CharactersScreen
 
 @ExperimentalMaterialApi
@@ -50,7 +50,7 @@ private fun NavGraphBuilder.charactersNav(navController: NavController) {
 
         composable(NavItem.ContentTypeDetail(Feature.CHARACTERS)) {
             val id = it.findArg<Int>(NavArg.ItemId)
-            CharacterDetailScreen(
+            MarvelItemDetailScreen(
                 characterId = id,
                 onUpClick = { navController.popBackStack() }
             )
