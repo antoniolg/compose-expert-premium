@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import coil.annotation.ExperimentalCoilApi
-import com.antonioleiva.marvelcompose.ui.navigation.Navigation
+import com.antonioleiva.marvelcompose.ui.MarvelApp
 
 @ExperimentalMaterialApi
 @ExperimentalCoilApi
@@ -16,9 +16,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MarvelApp {
-                Navigation()
-            }
+            MarvelApp()
         }
     }
 }
