@@ -11,8 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import coil.annotation.ExperimentalCoilApi
-import com.antonioleiva.marvelcompose.ui.screens.characterdetail.MarvelItemDetailScreen
-import com.antonioleiva.marvelcompose.ui.screens.characters.CharactersScreen
+import com.antonioleiva.marvelcompose.ui.screens.*
 
 @ExperimentalMaterialApi
 @ExperimentalCoilApi
@@ -26,9 +25,10 @@ fun Navigation() {
         startDestination = Feature.CHARACTERS.route
     ) {
         charactersNav(navController)
+        comicsNav(navController)
+        eventsNav(navController)
     }
 }
-
 
 @ExperimentalMaterialApi
 @ExperimentalCoilApi
@@ -50,8 +50,64 @@ private fun NavGraphBuilder.charactersNav(navController: NavController) {
 
         composable(NavItem.ContentTypeDetail(Feature.CHARACTERS)) {
             val id = it.findArg<Int>(NavArg.ItemId)
-            MarvelItemDetailScreen(
+            CharacterDetailScreen(
                 characterId = id,
+                onUpClick = { navController.popBackStack() }
+            )
+        }
+    }
+}
+
+@ExperimentalMaterialApi
+@ExperimentalCoilApi
+@ExperimentalFoundationApi
+private fun NavGraphBuilder.comicsNav(navController: NavController) {
+    navigation(
+        startDestination = NavItem.ContentType(Feature.COMICS).route,
+        route = Feature.COMICS.route
+    ) {
+        composable(NavItem.ContentType(Feature.COMICS)) {
+            ComicsScreen(
+                onClick = { comic ->
+                    navController.navigate(
+                        NavItem.ContentTypeDetail(Feature.COMICS).createRoute(comic.id)
+                    )
+                }
+            )
+        }
+
+        composable(NavItem.ContentTypeDetail(Feature.COMICS)) {
+            val id = it.findArg<Int>(NavArg.ItemId)
+            ComicDetailScreen(
+                comicId = id,
+                onUpClick = { navController.popBackStack() }
+            )
+        }
+    }
+}
+
+@ExperimentalMaterialApi
+@ExperimentalCoilApi
+@ExperimentalFoundationApi
+private fun NavGraphBuilder.eventsNav(navController: NavController) {
+    navigation(
+        startDestination = NavItem.ContentType(Feature.EVENTS).route,
+        route = Feature.EVENTS.route
+    ) {
+        composable(NavItem.ContentType(Feature.EVENTS)) {
+            EventsScreen(
+                onClick = { event ->
+                    navController.navigate(
+                        NavItem.ContentTypeDetail(Feature.EVENTS).createRoute(event.id)
+                    )
+                }
+            )
+        }
+
+        composable(NavItem.ContentTypeDetail(Feature.EVENTS)) {
+            val id = it.findArg<Int>(NavArg.ItemId)
+            EventDetailScreen(
+                eventId = id,
                 onUpClick = { navController.popBackStack() }
             )
         }

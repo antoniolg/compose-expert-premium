@@ -1,4 +1,4 @@
-package com.antonioleiva.marvelcompose.ui.screens.characterdetail
+package com.antonioleiva.marvelcompose.ui.screens.common
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -21,24 +21,9 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.antonioleiva.marvelcompose.R
-import com.antonioleiva.marvelcompose.data.entities.Character
 import com.antonioleiva.marvelcompose.data.entities.MarvelItem
 import com.antonioleiva.marvelcompose.data.entities.Reference
 import com.antonioleiva.marvelcompose.data.entities.ReferenceList
-import com.antonioleiva.marvelcompose.data.repositories.CharactersRepository
-
-@ExperimentalCoilApi
-@ExperimentalMaterialApi
-@Composable
-fun MarvelItemDetailScreen(characterId: Int, onUpClick: () -> Unit) {
-    var characterState by remember { mutableStateOf<Character?>(null) }
-    LaunchedEffect(Unit) {
-        characterState = CharactersRepository.find(characterId)
-    }
-    characterState?.let {
-        MarvelItemDetailScreen(it, onUpClick)
-    }
-}
 
 @ExperimentalCoilApi
 @ExperimentalMaterialApi

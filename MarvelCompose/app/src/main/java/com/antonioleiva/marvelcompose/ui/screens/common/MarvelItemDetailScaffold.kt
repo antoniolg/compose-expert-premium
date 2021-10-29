@@ -1,4 +1,4 @@
-package com.antonioleiva.marvelcompose.ui.screens.characterdetail
+package com.antonioleiva.marvelcompose.ui.screens.common
 
 import android.content.Context
 import androidx.compose.foundation.layout.PaddingValues

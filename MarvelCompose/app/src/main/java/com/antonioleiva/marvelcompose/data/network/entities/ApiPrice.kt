@@ -1,6 +1,6 @@
 package com.antonioleiva.marvelcompose.data.network.entities
 
 data class ApiPrice(
-    val price: Int,
+    val price: Double,
     val type: String
 )

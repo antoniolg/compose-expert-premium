@@ -1,4 +1,4 @@
-package com.antonioleiva.marvelcompose.ui.screens.characterdetail
+package com.antonioleiva.marvelcompose.ui.screens.common
 
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons

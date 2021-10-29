@@ -24,7 +24,7 @@ fun ApiEvent.asEvent(): Event = Event(
     thumbnail.asString(),
     listOf(
         comics.toDomain(ReferenceList.Type.COMIC),
-        characters.toDomain(ReferenceList.Type.EVENT),
+        characters.toDomain(ReferenceList.Type.CHARACTER),
         series.toDomain(ReferenceList.Type.SERIES),
         stories.toDomain(ReferenceList.Type.STORY)
     ),

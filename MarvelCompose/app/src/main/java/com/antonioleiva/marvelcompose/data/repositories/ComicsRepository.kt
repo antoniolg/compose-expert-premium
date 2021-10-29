@@ -5,7 +5,7 @@ import com.antonioleiva.marvelcompose.data.network.ApiClient
 
 object ComicsRepository : Repository<Comic>() {
 
-    suspend fun get(format: Comic.Format?): List<Comic> = super.get {
+    suspend fun get(format: Comic.Format? = null): List<Comic> = super.get {
         ApiClient
             .comicsService
             .getComics(0, 100, format?.toStringFormat())
