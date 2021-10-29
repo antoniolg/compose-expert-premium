@@ -7,6 +7,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.util.*
 
 const val API_ENDPOINT = "https://gateway.marvel.com/"
@@ -28,8 +29,9 @@ object ApiClient {
         .client(okHttpClient)
         .build()
 
-    val charactersService: CharactersService = restAdapter.create(CharactersService::class.java)
-    val comicsService: ComicsService = restAdapter.create(ComicsService::class.java)
+    val charactersService: CharactersService = restAdapter.create()
+    val comicsService: ComicsService = restAdapter.create()
+    val eventsService: EventsService = restAdapter.create()
 }
 
 private class QueryInterceptor : Interceptor {
