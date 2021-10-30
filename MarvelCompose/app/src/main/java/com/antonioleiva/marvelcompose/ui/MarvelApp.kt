@@ -17,7 +17,9 @@ import com.antonioleiva.marvelcompose.ui.navigation.AppBottomNavigation
 import com.antonioleiva.marvelcompose.ui.navigation.Navigation
 import com.antonioleiva.marvelcompose.ui.navigation.navigatePoppingUpToStartDestination
 import com.antonioleiva.marvelcompose.ui.theme.MarvelComposeTheme
+import com.google.accompanist.pager.ExperimentalPagerApi
 
+@ExperimentalPagerApi
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
 @ExperimentalMaterialApi

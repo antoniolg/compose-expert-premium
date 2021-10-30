@@ -6,10 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.marvelcompose.ui.screens.*
+import com.google.accompanist.pager.ExperimentalPagerApi
 
+@ExperimentalPagerApi
 @ExperimentalMaterialApi
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
@@ -54,6 +55,7 @@ private fun NavGraphBuilder.charactersNav(navController: NavController) {
     }
 }
 
+@ExperimentalPagerApi
 @ExperimentalMaterialApi
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
