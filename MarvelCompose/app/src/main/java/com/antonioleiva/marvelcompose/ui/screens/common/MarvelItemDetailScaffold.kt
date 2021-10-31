@@ -16,26 +16,16 @@ import androidx.core.app.ShareCompat
 import com.antonioleiva.marvelcompose.data.entities.MarvelItem
 import com.antonioleiva.marvelcompose.data.entities.Url
 import com.antonioleiva.marvelcompose.ui.navigation.AppBarIcon
-import com.antonioleiva.marvelcompose.ui.navigation.ArrowBackIcon
 
 @ExperimentalMaterialApi
 @Composable
 fun MarvelItemDetailScaffold(
     marvelItem: MarvelItem,
-    onUpClick: () -> Unit,
     content: @Composable (PaddingValues) -> Unit
 ) {
     val context = LocalContext.current
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(marvelItem.title) },
-                navigationIcon = { ArrowBackIcon(onUpClick) },
-                actions = { AppBarOverflowMenu(marvelItem.urls) }
-
-            )
-        },
         floatingActionButton = {
             if (marvelItem.urls.isNotEmpty()) {
                 FloatingActionButton(

@@ -10,7 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -28,13 +28,9 @@ import com.antonioleiva.marvelcompose.data.entities.ReferenceList
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
-fun MarvelItemDetailScreen(
-    marvelItem: MarvelItem,
-    onUpClick: () -> Unit
-) {
+fun MarvelItemDetailScreen(marvelItem: MarvelItem) {
     MarvelItemDetailScaffold(
-        marvelItem = marvelItem,
-        onUpClick = onUpClick
+        marvelItem = marvelItem
     ) { padding ->
         LazyColumn(
             modifier = Modifier

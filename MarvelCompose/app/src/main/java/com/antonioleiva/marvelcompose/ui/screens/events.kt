@@ -26,12 +26,12 @@ fun EventsScreen(onClick: (Event) -> Unit) {
 @ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
-fun EventDetailScreen(eventId: Int, onUpClick: () -> Unit) {
+fun EventDetailScreen(eventId: Int) {
     var eventState by remember { mutableStateOf<Event?>(null) }
     LaunchedEffect(Unit) {
         eventState = EventsRepository.find(eventId)
     }
     eventState?.let {
-        MarvelItemDetailScreen(it, onUpClick)
+        MarvelItemDetailScreen(it)
     }
 }
