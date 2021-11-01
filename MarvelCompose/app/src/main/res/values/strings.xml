@@ -13,4 +13,6 @@
     <string name="graphic_novel">Graphic Novel</string>
     <string name="digital_comic">Digital Comic</string>
     <string name="infinite_comic">Infinite Comic</string>
+    <string name="settings">Settings</string>
+    <string name="home">Home</string>
 </resources>

@@ -24,6 +24,7 @@ fun Navigation(navController: NavHostController) {
         charactersNav(navController)
         comicsNav(navController)
         eventsNav(navController)
+        composable(NavCommand.ContentType(Feature.SETTINGS)) { Settings() }
     }
 }
 
