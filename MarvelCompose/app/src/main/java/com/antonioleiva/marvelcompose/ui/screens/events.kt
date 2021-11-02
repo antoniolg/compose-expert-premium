@@ -13,7 +13,7 @@ import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemsListScreen
 @ExperimentalFoundationApi
 @Composable
 fun EventsScreen(onClick: (Event) -> Unit) {
-    var eventsState by remember() { mutableStateOf(emptyList<Event>()) }
+    var eventsState by remember { mutableStateOf(emptyList<Event>()) }
     LaunchedEffect(Unit) {
         eventsState = EventsRepository.get()
     }

@@ -13,7 +13,7 @@ import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemsListScreen
 @ExperimentalFoundationApi
 @Composable
 fun CharactersScreen(onClick: (Character) -> Unit) {
-    var charactersState by remember() { mutableStateOf(emptyList<Character>()) }
+    var charactersState by remember { mutableStateOf(emptyList<Character>()) }
     LaunchedEffect(Unit) {
         charactersState = CharactersRepository.get()
     }

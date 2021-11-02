@@ -1,6 +1,5 @@
 package com.antonioleiva.marvelcompose.data.repositories
 
-import com.antonioleiva.marvelcompose.data.entities.Character
 import com.antonioleiva.marvelcompose.data.entities.Event
 import com.antonioleiva.marvelcompose.data.network.ApiClient
 
