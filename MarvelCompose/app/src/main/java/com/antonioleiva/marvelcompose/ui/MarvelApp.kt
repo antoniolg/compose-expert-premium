@@ -7,41 +7,24 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.marvelcompose.R
-import com.antonioleiva.marvelcompose.ui.navigation.*
+import com.antonioleiva.marvelcompose.ui.navigation.AppBarIcon
+import com.antonioleiva.marvelcompose.ui.navigation.AppBottomNavigation
+import com.antonioleiva.marvelcompose.ui.navigation.DrawerContent
+import com.antonioleiva.marvelcompose.ui.navigation.Navigation
 import com.antonioleiva.marvelcompose.ui.theme.MarvelComposeTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
-import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
 @ExperimentalMaterialApi
 @Composable
-fun MarvelApp() {
-    val navController = rememberNavController()
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route ?: ""
-    val showUpNavigation = currentRoute !in NavItem.values().map { it.navCommand.route }
-    val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    val drawerOptions = listOf(NavItem.HOME, NavItem.SETTINGS)
-    val bottomNavOptions = listOf(NavItem.CHARACTERS, NavItem.COMICS, NavItem.EVENTS)
-
-    val showBottomNavigation =
-        bottomNavOptions.any { currentRoute.contains(it.navCommand.feature.route) }
-
-    val drawerSelectedIndex = if (showBottomNavigation) {
-        drawerOptions.indexOf(NavItem.HOME)
-    } else {
-        drawerOptions.indexOfFirst { it.navCommand.route == currentRoute }
-    }
+fun MarvelApp(appState: MarvelAppState = rememberMarvelAppState()) {
 
     MarvelScreen {
         Scaffold(
@@ -49,43 +32,38 @@ fun MarvelApp() {
                 TopAppBar(
                     title = { Text(stringResource(id = R.string.app_name)) },
                     navigationIcon = {
-                        if (showUpNavigation) {
+                        if (appState.showUpNavigation) {
                             AppBarIcon(
                                 imageVector = Icons.Default.ArrowBack,
-                                onClick = { navController.popBackStack() })
+                                onClick = { appState.onUpClick() })
                         } else {
                             AppBarIcon(
                                 imageVector = Icons.Default.Menu,
-                                onClick = { scope.launch { scaffoldState.drawerState.open() } }
+                                onClick = { appState.onMenuClick() }
                             )
                         }
                     }
                 )
             },
             bottomBar = {
-                if (showBottomNavigation) {
+                if (appState.showBottomNavigation) {
                     AppBottomNavigation(
-                        bottomNavOptions = bottomNavOptions,
-                        currentRoute = currentRoute,
-                        onNavItemClick = {
-                            navController.navigatePoppingUpToStartDestination(it.navCommand.route)
-                        })
+                        bottomNavOptions = MarvelAppState.BOTTOM_NAV_OPTIONS,
+                        currentRoute = appState.currentRoute,
+                        onNavItemClick = { appState.onNavItemClick(it) })
                 }
             },
             drawerContent = {
                 DrawerContent(
-                    drawerOptions = drawerOptions,
-                    selectedIndex = drawerSelectedIndex,
-                    onOptionClick = { navItem ->
-                        scope.launch { scaffoldState.drawerState.close() }
-                        navController.navigate(navItem.navCommand.route)
-                    }
+                    drawerOptions = MarvelAppState.DRAWER_OPTIONS,
+                    selectedIndex = appState.drawerSelectedIndex,
+                    onOptionClick = { appState.onDrawerOptionClick(it) }
                 )
             },
-            scaffoldState = scaffoldState
+            scaffoldState = appState.scaffoldState
         ) { padding ->
             Box(modifier = Modifier.padding(padding)) {
-                Navigation(navController)
+                Navigation(appState.navController)
             }
         }
     }
