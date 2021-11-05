@@ -5,6 +5,8 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -95,8 +97,9 @@ private fun Comic.Format.toStringRes(): Int = when (this) {
 @ExperimentalMaterialApi
 @Composable
 fun ComicDetailScreen(viewModel: ComicDetailViewModel = viewModel()) {
+    val state by viewModel.state.collectAsState()
     MarvelItemDetailScreen(
-        loading = viewModel.state.loading,
-        marvelItem = viewModel.state.comic
+        loading = state.loading,
+        marvelItem = state.comic
     )
 }

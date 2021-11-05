@@ -1,28 +1,27 @@
 package com.antonioleiva.marvelcompose.ui.screens.comics
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.antonioleiva.marvelcompose.data.entities.Comic
 import com.antonioleiva.marvelcompose.data.repositories.ComicsRepository
 import com.antonioleiva.marvelcompose.ui.navigation.NavArg
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class ComicDetailViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 
     private val id = savedStateHandle.get<Int>(NavArg.ItemId.key) ?: 0
 
-    var state by mutableStateOf(UiState())
-        private set
+    private val _state = MutableStateFlow(UiState())
+    val state = _state.asStateFlow()
 
     init {
 
         viewModelScope.launch {
-            state = UiState(loading = true)
-            state = UiState(comic = ComicsRepository.find(id))
+            _state.value = UiState(loading = true)
+            _state.value = UiState(comic = ComicsRepository.find(id))
         }
     }
 
