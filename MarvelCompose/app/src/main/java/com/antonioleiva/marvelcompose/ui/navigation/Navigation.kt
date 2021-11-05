@@ -7,7 +7,13 @@ import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import coil.annotation.ExperimentalCoilApi
-import com.antonioleiva.marvelcompose.ui.screens.*
+import com.antonioleiva.marvelcompose.ui.screens.Settings
+import com.antonioleiva.marvelcompose.ui.screens.characters.CharacterDetailScreen
+import com.antonioleiva.marvelcompose.ui.screens.characters.CharactersScreen
+import com.antonioleiva.marvelcompose.ui.screens.comics.ComicDetailScreen
+import com.antonioleiva.marvelcompose.ui.screens.comics.ComicsScreen
+import com.antonioleiva.marvelcompose.ui.screens.events.EventDetailScreen
+import com.antonioleiva.marvelcompose.ui.screens.events.EventsScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @ExperimentalPagerApi
@@ -47,8 +53,7 @@ private fun NavGraphBuilder.charactersNav(navController: NavController) {
         }
 
         composable(NavCommand.ContentTypeDetail(Feature.CHARACTERS)) {
-            val id = it.findArg<Int>(NavArg.ItemId)
-            CharacterDetailScreen(characterId = id)
+            CharacterDetailScreen()
         }
     }
 }
@@ -73,8 +78,7 @@ private fun NavGraphBuilder.comicsNav(navController: NavController) {
         }
 
         composable(NavCommand.ContentTypeDetail(Feature.COMICS)) {
-            val id = it.findArg<Int>(NavArg.ItemId)
-            ComicDetailScreen(comicId = id)
+            ComicDetailScreen()
         }
     }
 }
@@ -98,8 +102,7 @@ private fun NavGraphBuilder.eventsNav(navController: NavController) {
         }
 
         composable(NavCommand.ContentTypeDetail(Feature.EVENTS)) {
-            val id = it.findArg<Int>(NavArg.ItemId)
-            EventDetailScreen(eventId = id)
+            EventDetailScreen()
         }
     }
 }
@@ -114,10 +117,4 @@ private fun NavGraphBuilder.composable(
     ) {
         content(it)
     }
-}
-
-private inline fun <reified T> NavBackStackEntry.findArg(arg: NavArg): T {
-    val value = arguments?.get(arg.key)
-    requireNotNull(value)
-    return value as T
 }
