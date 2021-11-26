@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.marvelcompose.ui.screens.Settings
 import com.antonioleiva.marvelcompose.ui.screens.characters.CharacterDetailScreen
 import com.antonioleiva.marvelcompose.ui.screens.characters.CharactersScreen
@@ -18,7 +17,6 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
-@ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
 fun Navigation(navController: NavHostController) {
@@ -35,7 +33,6 @@ fun Navigation(navController: NavHostController) {
 }
 
 @ExperimentalMaterialApi
-@ExperimentalCoilApi
 @ExperimentalFoundationApi
 private fun NavGraphBuilder.charactersNav(navController: NavController) {
     navigation(
@@ -60,7 +57,6 @@ private fun NavGraphBuilder.charactersNav(navController: NavController) {
 
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
-@ExperimentalCoilApi
 @ExperimentalFoundationApi
 private fun NavGraphBuilder.comicsNav(navController: NavController) {
     navigation(
@@ -84,7 +80,6 @@ private fun NavGraphBuilder.comicsNav(navController: NavController) {
 }
 
 @ExperimentalMaterialApi
-@ExperimentalCoilApi
 @ExperimentalFoundationApi
 private fun NavGraphBuilder.eventsNav(navController: NavController) {
     navigation(

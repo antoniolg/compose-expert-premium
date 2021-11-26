@@ -10,7 +10,6 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.ui.navigation.AppBarIcon
 import com.antonioleiva.marvelcompose.ui.navigation.AppBottomNavigation
@@ -20,7 +19,6 @@ import com.antonioleiva.marvelcompose.ui.theme.MarvelComposeTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @ExperimentalPagerApi
-@ExperimentalCoilApi
 @ExperimentalFoundationApi
 @ExperimentalMaterialApi
 @Composable

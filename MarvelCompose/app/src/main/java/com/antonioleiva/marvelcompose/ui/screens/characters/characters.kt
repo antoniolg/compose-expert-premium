@@ -6,12 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.marvelcompose.data.entities.Character
 import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemDetailScreen
 import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemsListScreen
 
-@ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
 fun CharactersScreen(onClick: (Character) -> Unit, viewModel: CharactersViewModel = viewModel()) {
@@ -23,7 +21,6 @@ fun CharactersScreen(onClick: (Character) -> Unit, viewModel: CharactersViewMode
     )
 }
 
-@ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
 fun CharacterDetailScreen(viewModel: CharacterDetailViewModel = viewModel()) {

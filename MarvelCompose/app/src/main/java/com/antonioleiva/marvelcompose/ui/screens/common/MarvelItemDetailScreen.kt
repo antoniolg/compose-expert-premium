@@ -18,14 +18,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.entities.MarvelItem
 import com.antonioleiva.marvelcompose.data.entities.Reference
 import com.antonioleiva.marvelcompose.data.entities.ReferenceList
 
-@ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
 fun MarvelItemDetailScreen(loading: Boolean, marvelItem: MarvelItem?) {
@@ -55,7 +53,6 @@ fun MarvelItemDetailScreen(loading: Boolean, marvelItem: MarvelItem?) {
     }
 }
 
-@ExperimentalCoilApi
 @Composable
 private fun Header(marvelItem: MarvelItem) {
     Column(

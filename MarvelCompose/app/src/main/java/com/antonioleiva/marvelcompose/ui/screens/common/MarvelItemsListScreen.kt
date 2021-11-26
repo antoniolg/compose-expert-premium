@@ -13,10 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.marvelcompose.data.entities.MarvelItem
 
-@ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
 fun <T : MarvelItem> MarvelItemsListScreen(
@@ -31,7 +29,6 @@ fun <T : MarvelItem> MarvelItemsListScreen(
     )
 }
 
-@ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
 fun <T : MarvelItem> MarvelItemsList(

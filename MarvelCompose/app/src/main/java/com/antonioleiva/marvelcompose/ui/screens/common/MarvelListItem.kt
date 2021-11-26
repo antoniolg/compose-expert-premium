@@ -15,7 +15,6 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.antonioleiva.marvelcompose.data.entities.MarvelItem
 
-@ExperimentalCoilApi
 @Composable
 fun MarvelListItem(marvelItem: MarvelItem, modifier: Modifier = Modifier) {
     Column(

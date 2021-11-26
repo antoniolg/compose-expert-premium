@@ -11,7 +11,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.annotation.ExperimentalCoilApi
 import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.entities.Comic
 import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemDetailScreen
@@ -20,7 +19,6 @@ import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 
 @ExperimentalPagerApi
-@ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
 fun ComicsScreen(onClick: (Comic) -> Unit, viewModel: ComicsViewModel = viewModel()) {
@@ -93,7 +91,6 @@ private fun Comic.Format.toStringRes(): Int = when (this) {
 }
 
 
-@ExperimentalCoilApi
 @ExperimentalMaterialApi
 @Composable
 fun ComicDetailScreen(viewModel: ComicDetailViewModel = viewModel()) {
