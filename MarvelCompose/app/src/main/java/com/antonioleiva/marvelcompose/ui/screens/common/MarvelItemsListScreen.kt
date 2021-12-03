@@ -14,19 +14,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.antonioleiva.marvelcompose.data.entities.MarvelItem
+import com.antonioleiva.marvelcompose.data.entities.Result
 
 @ExperimentalFoundationApi
 @Composable
 fun <T : MarvelItem> MarvelItemsListScreen(
     loading: Boolean = false,
-    items: List<T>,
+    items: Result<List<T>>,
     onClick: (T) -> Unit
 ) {
-    MarvelItemsList(
-        loading = loading,
-        items = items,
-        onItemClick = onClick
-    )
+    items.fold({ ErrorMessage(it) }) { marvelItems ->
+        MarvelItemsList(
+            loading = loading,
+            items = marvelItems,
+            onItemClick = onClick
+        )
+    }
 }
 
 @ExperimentalFoundationApi

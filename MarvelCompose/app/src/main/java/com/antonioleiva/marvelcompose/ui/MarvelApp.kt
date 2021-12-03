@@ -1,4 +1,4 @@
-package com.antonioleiva.marvelcompose.ui
+ package com.antonioleiva.marvelcompose.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box

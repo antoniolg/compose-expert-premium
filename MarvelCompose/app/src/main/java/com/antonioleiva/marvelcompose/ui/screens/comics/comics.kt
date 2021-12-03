@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.entities.Comic
+import com.antonioleiva.marvelcompose.ui.screens.common.ErrorMessage
 import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemDetailScreen
 import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemsList
 import com.google.accompanist.pager.*
@@ -21,7 +22,10 @@ import kotlinx.coroutines.launch
 @ExperimentalPagerApi
 @ExperimentalFoundationApi
 @Composable
-fun ComicsScreen(onClick: (Comic) -> Unit, viewModel: ComicsViewModel = viewModel()) {
+fun ComicsScreen(
+    onClick: (Comic) -> Unit,
+    viewModel: ComicsViewModel = viewModel()
+) {
 
     val formats = Comic.Format.values().toList()
     val pagerState = rememberPagerState()
@@ -37,12 +41,14 @@ fun ComicsScreen(onClick: (Comic) -> Unit, viewModel: ComicsViewModel = viewMode
         ) { page ->
             val format = formats[page]
             viewModel.formatRequested(format)
-            val pageState = viewModel.state.getValue(format).value
-            MarvelItemsList(
-                loading = pageState.loading,
-                items = pageState.comics,
-                onItemClick = onClick
-            )
+            val pageState by viewModel.state.getValue(format).collectAsState()
+            pageState.comics.fold({ ErrorMessage(it) }) {
+                MarvelItemsList(
+                    loading = pageState.loading,
+                    items = it,
+                    onItemClick = onClick
+                )
+            }
         }
     }
 
@@ -93,8 +99,11 @@ private fun Comic.Format.toStringRes(): Int = when (this) {
 
 @ExperimentalMaterialApi
 @Composable
-fun ComicDetailScreen(viewModel: ComicDetailViewModel = viewModel()) {
+fun ComicDetailScreen(
+    viewModel: ComicDetailViewModel = viewModel()
+) {
     val state by viewModel.state.collectAsState()
+
     MarvelItemDetailScreen(
         loading = state.loading,
         marvelItem = state.comic

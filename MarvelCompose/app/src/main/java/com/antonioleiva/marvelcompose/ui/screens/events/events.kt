@@ -12,8 +12,12 @@ import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemsListScreen
 
 @ExperimentalFoundationApi
 @Composable
-fun EventsScreen(onClick: (Event) -> Unit, viewModel: EventsViewModel = viewModel()) {
+fun EventsScreen(
+    onClick: (Event) -> Unit,
+    viewModel: EventsViewModel = viewModel()
+) {
     val state by viewModel.state.collectAsState()
+
     MarvelItemsListScreen(
         items = state.events,
         onClick = onClick,
@@ -23,7 +27,9 @@ fun EventsScreen(onClick: (Event) -> Unit, viewModel: EventsViewModel = viewMode
 
 @ExperimentalMaterialApi
 @Composable
-fun EventDetailScreen(viewModel: EventDetailViewModel = viewModel()) {
+fun EventDetailScreen(
+    viewModel: EventDetailViewModel = viewModel()
+) {
     val state by viewModel.state.collectAsState()
     MarvelItemDetailScreen(state.loading, state.event)
 }

@@ -23,30 +23,33 @@ import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.entities.MarvelItem
 import com.antonioleiva.marvelcompose.data.entities.Reference
 import com.antonioleiva.marvelcompose.data.entities.ReferenceList
+import com.antonioleiva.marvelcompose.data.entities.Result
 
 @ExperimentalMaterialApi
 @Composable
-fun MarvelItemDetailScreen(loading: Boolean, marvelItem: MarvelItem?) {
+fun MarvelItemDetailScreen(loading: Boolean, marvelItem: Result<MarvelItem?>) {
 
-    if(loading){
+    if (loading) {
         CircularProgressIndicator()
     }
 
-    if (marvelItem!= null){
-        MarvelItemDetailScaffold(
-            marvelItem = marvelItem
-        ) { padding ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(padding)
-            ) {
-                item {
-                    Header(marvelItem = marvelItem)
-                }
-                marvelItem.references.forEach {
-                    val (icon, @StringRes stringRes) = it.type.createUiData()
-                    section(icon, stringRes, it.references)
+    marvelItem.fold({ ErrorMessage(it) }) { item ->
+        if (item != null) {
+            MarvelItemDetailScaffold(
+                marvelItem = item
+            ) { padding ->
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(padding)
+                ) {
+                    item {
+                        Header(marvelItem = item)
+                    }
+                    item.references.forEach {
+                        val (icon, @StringRes stringRes) = it.type.createUiData()
+                        section(icon, stringRes, it.references)
+                    }
                 }
             }
         }

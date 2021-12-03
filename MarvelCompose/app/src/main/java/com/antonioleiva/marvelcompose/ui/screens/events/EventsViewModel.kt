@@ -2,7 +2,9 @@ package com.antonioleiva.marvelcompose.ui.screens.events
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import arrow.core.right
 import com.antonioleiva.marvelcompose.data.entities.Event
+import com.antonioleiva.marvelcompose.data.entities.Result
 import com.antonioleiva.marvelcompose.data.repositories.EventsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,6 +24,6 @@ class EventsViewModel : ViewModel() {
 
     data class UiState(
         val loading: Boolean = false,
-        val events: List<Event> = emptyList()
+        val events: Result<List<Event>> = emptyList<Event>().right()
     )
 }

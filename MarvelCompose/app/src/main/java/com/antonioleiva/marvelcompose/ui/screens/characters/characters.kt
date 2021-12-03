@@ -12,8 +12,12 @@ import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemsListScreen
 
 @ExperimentalFoundationApi
 @Composable
-fun CharactersScreen(onClick: (Character) -> Unit, viewModel: CharactersViewModel = viewModel()) {
+fun CharactersScreen(
+    onClick: (Character) -> Unit,
+    viewModel: CharactersViewModel = viewModel()
+) {
     val state by viewModel.state.collectAsState()
+
     MarvelItemsListScreen(
         loading = state.loading,
         items = state.characters,
@@ -25,6 +29,7 @@ fun CharactersScreen(onClick: (Character) -> Unit, viewModel: CharactersViewMode
 @Composable
 fun CharacterDetailScreen(viewModel: CharacterDetailViewModel = viewModel()) {
     val state by viewModel.state.collectAsState()
+
     MarvelItemDetailScreen(
         loading = state.loading,
         marvelItem = state.character
