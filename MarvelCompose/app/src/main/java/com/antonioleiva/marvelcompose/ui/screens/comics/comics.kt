@@ -13,12 +13,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.entities.Comic
-import com.antonioleiva.marvelcompose.ui.screens.common.ErrorMessage
 import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemDetailScreen
-import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemsList
+import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemsListScreen
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 
+@ExperimentalMaterialApi
 @ExperimentalPagerApi
 @ExperimentalFoundationApi
 @Composable
@@ -42,13 +42,11 @@ fun ComicsScreen(
             val format = formats[page]
             viewModel.formatRequested(format)
             val pageState by viewModel.state.getValue(format).collectAsState()
-            pageState.comics.fold({ ErrorMessage(it) }) {
-                MarvelItemsList(
-                    loading = pageState.loading,
-                    items = it,
-                    onItemClick = onClick
-                )
-            }
+            MarvelItemsListScreen(
+                loading = pageState.loading,
+                items = pageState.comics,
+                onClick = onClick
+            )
         }
     }
 

@@ -10,6 +10,7 @@ import com.antonioleiva.marvelcompose.data.entities.Character
 import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemDetailScreen
 import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemsListScreen
 
+@ExperimentalMaterialApi
 @ExperimentalFoundationApi
 @Composable
 fun CharactersScreen(
