@@ -34,7 +34,7 @@ fun <T : MarvelItem> MarvelItemsListScreen(
         val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
         val scope = rememberCoroutineScope()
 
-        BackPressedHandler {
+        BackPressedHandler(sheetState.isVisible) {
             scope.launch { sheetState.hide() }
         }
 
@@ -68,17 +68,21 @@ fun <T : MarvelItem> MarvelItemsListScreen(
 }
 
 @Composable
-fun BackPressedHandler(onBack: () -> Unit) {
+fun BackPressedHandler(enabled: Boolean, onBack: () -> Unit) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val backDispatcher =
         requireNotNull(LocalOnBackPressedDispatcherOwner.current).onBackPressedDispatcher
 
     val backCallback = remember {
-        object : OnBackPressedCallback(true) {
+        object : OnBackPressedCallback(enabled) {
             override fun handleOnBackPressed() {
                 onBack()
             }
         }
+    }
+
+    SideEffect {
+        backCallback.isEnabled = enabled
     }
 
     DisposableEffect(lifecycleOwner, backDispatcher) {
