@@ -1,4 +1,4 @@
- package com.antonioleiva.marvelcompose.ui
+package com.antonioleiva.marvelcompose.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
@@ -8,7 +8,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.ui.navigation.AppBarIcon
@@ -18,6 +20,8 @@ import com.antonioleiva.marvelcompose.ui.navigation.Navigation
 import com.antonioleiva.marvelcompose.ui.screens.common.MarvelTopAppBar
 import com.antonioleiva.marvelcompose.ui.theme.MarvelComposeTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.systemuicontroller.SystemUiController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @ExperimentalPagerApi
 @ExperimentalFoundationApi
@@ -65,6 +69,8 @@ fun MarvelApp(appState: MarvelAppState = rememberMarvelAppState()) {
                 Navigation(appState.navController)
             }
         }
+
+        SetStatusBarColorEffect()
     }
 }
 
@@ -75,5 +81,16 @@ fun MarvelScreen(content: @Composable () -> Unit) {
         Surface(color = MaterialTheme.colors.background) {
             content()
         }
+    }
+}
+
+@Composable
+private fun SetStatusBarColorEffect(
+    color: Color = MaterialTheme.colors.primaryVariant,
+    systemUiController: SystemUiController = rememberSystemUiController()
+) {
+
+    SideEffect {
+        systemUiController.setStatusBarColor(color)
     }
 }
