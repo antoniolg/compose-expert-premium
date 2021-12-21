@@ -15,6 +15,7 @@ import com.antonioleiva.marvelcompose.ui.navigation.AppBarIcon
 import com.antonioleiva.marvelcompose.ui.navigation.AppBottomNavigation
 import com.antonioleiva.marvelcompose.ui.navigation.DrawerContent
 import com.antonioleiva.marvelcompose.ui.navigation.Navigation
+import com.antonioleiva.marvelcompose.ui.screens.common.MarvelTopAppBar
 import com.antonioleiva.marvelcompose.ui.theme.MarvelComposeTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
 
@@ -27,7 +28,7 @@ fun MarvelApp(appState: MarvelAppState = rememberMarvelAppState()) {
     MarvelScreen {
         Scaffold(
             topBar = {
-                TopAppBar(
+                MarvelTopAppBar(
                     title = { Text(stringResource(id = R.string.app_name)) },
                     navigationIcon = {
                         if (appState.showUpNavigation) {

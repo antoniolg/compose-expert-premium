@@ -1,6 +1,5 @@
 package com.antonioleiva.marvelcompose.ui.navigation
 
-import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -13,7 +12,7 @@ fun AppBottomNavigation(
     currentRoute: String,
     onNavItemClick: (NavItem) -> Unit
 ) {
-    BottomNavigation {
+    MarvelBottomNavigation {
         bottomNavOptions.forEach { item ->
             val title = stringResource(item.title)
             BottomNavigationItem(
