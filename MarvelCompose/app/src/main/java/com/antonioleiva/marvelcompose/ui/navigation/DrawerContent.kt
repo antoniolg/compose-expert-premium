@@ -11,6 +11,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,7 +55,7 @@ fun DrawerContent(
                     .fillMaxWidth()
                     .padding(8.dp, 4.dp)
                     .clip(RoundedCornerShape(4.dp))
-                    .background(color = if (selected) LocalContentColor.current.copy(alpha = 0.12f) else colors.surface)
+                    .background(color = if (selected) LocalContentColor.current.copy(alpha = 0.12f) else Color.Transparent)
                     .padding(12.dp)
             ) {
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
