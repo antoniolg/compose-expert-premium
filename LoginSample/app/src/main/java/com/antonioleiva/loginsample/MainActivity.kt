@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -77,10 +78,19 @@ fun Login() {
                     IconToggleButton(
                         checked = passVisible,
                         onCheckedChange = { passVisible = it }) {
-                        Icon(
-                            imageVector = if (passVisible) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                            contentDescription = null
-                        )
+                        Crossfade(targetState = passVisible) { visible ->
+                            if (visible) {
+                                Icon(
+                                    imageVector = Icons.Default.VisibilityOff,
+                                    contentDescription = null
+                                )
+                            } else {
+                                Icon(
+                                    imageVector = Icons.Default.Visibility,
+                                    contentDescription = null
+                                )
+                            }
+                        }
                     }
                 }
             )
