@@ -5,11 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
 import androidx.compose.animation.AnimatedContentScope.SlideDirection.Companion.Up
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.keyframes
-import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.animateDp
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -27,6 +26,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.antonioleiva.loginsample.ui.theme.LoginSampleTheme
+import kotlin.math.min
 
 @ExperimentalAnimationApi
 class MainActivity : ComponentActivity() {
@@ -50,17 +50,13 @@ fun Login() {
 
         val loginEnabled = user.isNotEmpty() && pass.isNotEmpty()
 
-        val infiniteTransition = rememberInfiniteTransition()
-        val bgColor by infiniteTransition.animateColor(
-            initialValue = Color.White,
-            targetValue = Color.LightGray,
-            animationSpec = infiniteRepeatable(
-                animation = keyframes {
-                    durationMillis = 500
-                },
-                repeatMode = RepeatMode.Reverse
-            )
-        )
+        val transition = updateTransition(targetState = count, label = "updateTransition")
+
+        val borderDp by transition.animateDp(label = "transitionDp") { it.dp }
+
+        val bgColor by transition.animateColor(label = "transitionColor") {
+            Color.Gray.copy(alpha = min(1f, it / 10f))
+        }
 
         Box(
             contentAlignment = Alignment.Center
@@ -71,6 +67,7 @@ fun Login() {
                 modifier = Modifier
                     .wrapContentSize()
                     .background(bgColor)
+                    .border(borderDp, Color.Gray)
                     .padding(16.dp)
             ) {
                 TextField(
