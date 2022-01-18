@@ -3,12 +3,11 @@ package com.antonioleiva.loginsample
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.Crossfade
+import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedContentScope.SlideDirection.Companion.Up
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -25,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.antonioleiva.loginsample.ui.theme.LoginSampleTheme
 
+@ExperimentalAnimationApi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,18 +34,17 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalAnimationApi
 @Preview
 @Composable
 fun Login() {
     Screen {
         var user by remember { mutableStateOf("") }
         var pass by remember { mutableStateOf("") }
-        var validationMessage by remember { mutableStateOf("") }
+        var count by remember { mutableStateOf(0) }
         var passVisible by remember { mutableStateOf(false) }
 
         val loginEnabled = user.isNotEmpty() && pass.isNotEmpty()
-        val isError = validationMessage.isNotEmpty()
-        val login = { validationMessage = validateLogin(user, pass) }
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -54,7 +53,6 @@ fun Login() {
             TextField(
                 value = user,
                 onValueChange = { user = it },
-                isError = isError,
                 label = { Text("User") },
                 placeholder = { Text("Use your best email") },
                 singleLine = true,
@@ -66,13 +64,11 @@ fun Login() {
             TextField(
                 value = pass,
                 onValueChange = { pass = it },
-                isError = isError,
                 label = { Text("Pass") },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password
                 ),
-                keyboardActions = KeyboardActions { login() },
                 visualTransformation = if (passVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
                     IconToggleButton(
@@ -94,13 +90,22 @@ fun Login() {
                     }
                 }
             )
-            AnimatedVisibility(visible = validationMessage.isNotEmpty()) {
-                Text(text = validationMessage, color = MaterialTheme.colors.error)
+
+            AnimatedContent(
+                targetState = count,
+                transitionSpec = {
+                    (slideIntoContainer(Up) + fadeIn() with
+                            slideOutOfContainer(Up) + fadeOut())
+                }
+            ) {
+                Text(text = "Num of clicks: $it")
             }
 
             AnimatedVisibility(visible = loginEnabled) {
                 Button(
-                    onClick = login
+                    onClick = {
+                        count++
+                    }
                 ) {
                     Text(text = "LOGIN")
                 }
