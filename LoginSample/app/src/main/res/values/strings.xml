@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Login Sample</string>
+    <string name="reveal_password">Reveal Password</string>
+    <string name="hide_password">Hide Pasword</string>
 </resources>

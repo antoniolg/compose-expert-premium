@@ -9,19 +9,14 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.antonioleiva.loginsample.ui.theme.LoginSampleTheme
@@ -44,7 +39,6 @@ fun Login() {
         var user by remember { mutableStateOf("") }
         var pass by remember { mutableStateOf("") }
         var count by remember { mutableStateOf(0) }
-        var passVisible by remember { mutableStateOf(false) }
 
         val loginEnabled = user.isNotEmpty() && pass.isNotEmpty()
 
@@ -62,45 +56,13 @@ fun Login() {
                     .border(borderDp, Color.Gray)
                     .padding(16.dp)
             ) {
-                TextField(
+                UserTextField(
                     value = user,
-                    onValueChange = { user = it },
-                    label = { Text("User") },
-                    placeholder = { Text("Use your best email") },
-                    singleLine = true,
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Email,
-                        imeAction = ImeAction.Next
-                    )
+                    onValueChange = { user = it }
                 )
-                TextField(
+                PassTextField(
                     value = pass,
-                    onValueChange = { pass = it },
-                    label = { Text("Pass") },
-                    singleLine = true,
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Password
-                    ),
-                    visualTransformation = if (passVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                    trailingIcon = {
-                        IconToggleButton(
-                            checked = passVisible,
-                            onCheckedChange = { passVisible = it }) {
-                            Crossfade(targetState = passVisible) { visible ->
-                                if (visible) {
-                                    Icon(
-                                        imageVector = Icons.Default.VisibilityOff,
-                                        contentDescription = null
-                                    )
-                                } else {
-                                    Icon(
-                                        imageVector = Icons.Default.Visibility,
-                                        contentDescription = null
-                                    )
-                                }
-                            }
-                        }
-                    }
+                    onValueChange = { pass = it }
                 )
 
                 AnimatedContent(
