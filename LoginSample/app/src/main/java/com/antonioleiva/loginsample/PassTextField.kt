@@ -10,10 +10,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+
+const val PASS_TEXT_FIELD_TEST_TAG = "PassTextFieldTestTag"
+const val PASS_REVEAL_ICON_TEST_TAG = "PassRevealIconTestTag"
 
 @Composable
 fun PassTextField(value: String, onValueChange: (String) -> Unit) {
@@ -31,7 +36,9 @@ fun PassTextField(value: String, onValueChange: (String) -> Unit) {
         trailingIcon = {
             IconToggleButton(
                 checked = passVisible,
-                onCheckedChange = { passVisible = it }) {
+                onCheckedChange = { passVisible = it },
+                modifier = Modifier.testTag(PASS_REVEAL_ICON_TEST_TAG)
+            ) {
                 Crossfade(targetState = passVisible) { visible ->
                     if (visible) {
                         Icon(
@@ -46,6 +53,7 @@ fun PassTextField(value: String, onValueChange: (String) -> Unit) {
                     }
                 }
             }
-        }
+        },
+        modifier = Modifier.testTag(PASS_TEXT_FIELD_TEST_TAG)
     )
 }
