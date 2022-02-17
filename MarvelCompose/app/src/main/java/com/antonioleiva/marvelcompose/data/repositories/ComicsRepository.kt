@@ -4,8 +4,9 @@ import com.antonioleiva.marvelcompose.data.entities.Comic
 import com.antonioleiva.marvelcompose.data.entities.Result
 import com.antonioleiva.marvelcompose.data.entities.tryCall
 import com.antonioleiva.marvelcompose.data.network.remote.ComicsService
+import javax.inject.Inject
 
-class ComicsRepository(private val service: ComicsService) {
+class ComicsRepository @Inject constructor(private val service: ComicsService) {
 
     suspend fun get(format: Comic.Format? = null): Result<List<Comic>> = tryCall {
         service

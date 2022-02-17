@@ -3,8 +3,9 @@ package com.antonioleiva.marvelcompose.data.repositories
 import com.antonioleiva.marvelcompose.data.entities.Event
 import com.antonioleiva.marvelcompose.data.entities.Result
 import com.antonioleiva.marvelcompose.data.network.remote.EventsService
+import javax.inject.Inject
 
-class EventsRepository(private val service: EventsService) : Repository<Event>() {
+class EventsRepository @Inject constructor(private val service: EventsService) : Repository<Event>() {
 
     suspend fun get(): Result<List<Event>> = super.get {
         service

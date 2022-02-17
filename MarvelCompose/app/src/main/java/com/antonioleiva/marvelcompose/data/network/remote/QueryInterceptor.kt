@@ -1,11 +1,15 @@
 package com.antonioleiva.marvelcompose.data.network.remote
 
+import com.antonioleiva.marvelcompose.PrivateKey
+import com.antonioleiva.marvelcompose.PublicKey
 import com.antonioleiva.marvelcompose.data.network.generateHash
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.util.*
+import javax.inject.Inject
 
-class QueryInterceptor(private val privateKey: String, private val publicKey: String) :
+class QueryInterceptor @Inject constructor(@PrivateKey private val privateKey: String,
+                                           @PublicKey private val publicKey: String) :
     Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()

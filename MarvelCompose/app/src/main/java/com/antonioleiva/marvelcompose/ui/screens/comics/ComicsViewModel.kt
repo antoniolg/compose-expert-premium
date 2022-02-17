@@ -7,10 +7,13 @@ import arrow.core.right
 import com.antonioleiva.marvelcompose.data.entities.Comic
 import com.antonioleiva.marvelcompose.data.entities.Result
 import com.antonioleiva.marvelcompose.data.repositories.ComicsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ComicsViewModel(private val repository: ComicsRepository) : ViewModel() {
+@HiltViewModel
+class ComicsViewModel @Inject constructor(private val repository: ComicsRepository) : ViewModel() {
 
     val state = Comic.Format.values().associate { it to MutableStateFlow(UiState()) }
 

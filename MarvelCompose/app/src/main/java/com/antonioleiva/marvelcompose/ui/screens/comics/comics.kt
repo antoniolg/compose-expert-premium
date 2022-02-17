@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.entities.Comic
@@ -24,7 +25,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ComicsScreen(
     onClick: (Comic) -> Unit,
-    viewModel: ComicsViewModel = viewModel()
+    viewModel: ComicsViewModel = hiltViewModel()
 ) {
 
     val formats = Comic.Format.values().toList()
@@ -98,7 +99,7 @@ private fun Comic.Format.toStringRes(): Int = when (this) {
 @ExperimentalMaterialApi
 @Composable
 fun ComicDetailScreen(
-    viewModel: ComicDetailViewModel = viewModel()
+    viewModel: ComicDetailViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
 

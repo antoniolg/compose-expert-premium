@@ -8,11 +8,14 @@ import com.antonioleiva.marvelcompose.data.entities.Character
 import com.antonioleiva.marvelcompose.data.entities.Result
 import com.antonioleiva.marvelcompose.data.repositories.CharactersRepository
 import com.antonioleiva.marvelcompose.ui.navigation.NavArg
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CharacterDetailViewModel(savedStateHandle: SavedStateHandle, repository: CharactersRepository) : ViewModel() {
+@HiltViewModel
+class CharacterDetailViewModel @Inject constructor(savedStateHandle: SavedStateHandle, repository: CharactersRepository) : ViewModel() {
 
     private val id = savedStateHandle.get<Int>(NavArg.ItemId.key) ?: 0
 
