@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class EventsViewModel : ViewModel() {
+class EventsViewModel(repository: EventsRepository) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
     val state = _state.asStateFlow()
@@ -18,7 +18,7 @@ class EventsViewModel : ViewModel() {
     init {
         viewModelScope.launch {
             _state.value = UiState(loading = true)
-            _state.value = UiState(events = EventsRepository.get())
+            _state.value = UiState(events = repository.get())
         }
     }
 

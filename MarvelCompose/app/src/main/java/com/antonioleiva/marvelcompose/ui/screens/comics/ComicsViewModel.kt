@@ -10,7 +10,7 @@ import com.antonioleiva.marvelcompose.data.repositories.ComicsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class ComicsViewModel : ViewModel() {
+class ComicsViewModel(private val repository: ComicsRepository) : ViewModel() {
 
     val state = Comic.Format.values().associate { it to MutableStateFlow(UiState()) }
 
@@ -20,7 +20,7 @@ class ComicsViewModel : ViewModel() {
         if (comics is Either.Right && comics.value.isEmpty()) {
             viewModelScope.launch {
                 uiState.value = UiState(loading = true)
-                uiState.value = UiState(comics = ComicsRepository.get(format))
+                uiState.value = UiState(comics = repository.get(format))
             }
         }
     }

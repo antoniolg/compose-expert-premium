@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class CharacterDetailViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
+class CharacterDetailViewModel(savedStateHandle: SavedStateHandle, repository: CharactersRepository) : ViewModel() {
 
     private val id = savedStateHandle.get<Int>(NavArg.ItemId.key) ?: 0
 
@@ -23,7 +23,7 @@ class CharacterDetailViewModel(savedStateHandle: SavedStateHandle) : ViewModel()
 
         viewModelScope.launch {
             _state.value = UiState(loading = true)
-            _state.value = UiState(character = CharactersRepository.find(id))
+            _state.value = UiState(character = repository.find(id))
         }
     }
 

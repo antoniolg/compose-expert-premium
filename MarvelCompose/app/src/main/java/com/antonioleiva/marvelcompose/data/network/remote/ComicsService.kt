@@ -1,4 +1,4 @@
-package com.antonioleiva.marvelcompose.data.network
+package com.antonioleiva.marvelcompose.data.network.remote
 
 import com.antonioleiva.marvelcompose.data.network.entities.ApiComic
 import com.antonioleiva.marvelcompose.data.network.entities.ApiResponse

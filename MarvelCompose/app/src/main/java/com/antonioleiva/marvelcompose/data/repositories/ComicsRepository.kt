@@ -3,13 +3,12 @@ package com.antonioleiva.marvelcompose.data.repositories
 import com.antonioleiva.marvelcompose.data.entities.Comic
 import com.antonioleiva.marvelcompose.data.entities.Result
 import com.antonioleiva.marvelcompose.data.entities.tryCall
-import com.antonioleiva.marvelcompose.data.network.ApiClient
+import com.antonioleiva.marvelcompose.data.network.remote.ComicsService
 
-object ComicsRepository {
+class ComicsRepository(private val service: ComicsService) {
 
     suspend fun get(format: Comic.Format? = null): Result<List<Comic>> = tryCall {
-        ApiClient
-            .comicsService
+        service
             .getComics(0, 10, format?.toStringFormat())
             .data
             .results
@@ -17,8 +16,7 @@ object ComicsRepository {
     }
 
     suspend fun find(id: Int): Result<Comic> = tryCall {
-        ApiClient
-            .comicsService
+        service
             .findComic(id)
             .data
             .results

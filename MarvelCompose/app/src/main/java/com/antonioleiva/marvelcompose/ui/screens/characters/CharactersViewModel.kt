@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class CharactersViewModel : ViewModel() {
+class CharactersViewModel(private val repository: CharactersRepository) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
     val state = _state.asStateFlow()
@@ -18,7 +18,7 @@ class CharactersViewModel : ViewModel() {
     init {
         viewModelScope.launch {
             _state.value = UiState(loading = true)
-            _state.value = UiState(characters = CharactersRepository.get())
+            _state.value = UiState(characters = repository.get())
         }
     }
 
