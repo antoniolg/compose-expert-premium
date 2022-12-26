@@ -2,7 +2,6 @@ package com.antonioleiva.marvelcompose.ui.screens.common
 
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,7 +23,7 @@ import com.antonioleiva.marvelcompose.data.entities.MarvelItem
 import com.antonioleiva.marvelcompose.data.entities.Result
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun <T : MarvelItem> MarvelItemsListScreen(
     loading: Boolean = false,
@@ -95,7 +94,6 @@ fun BackPressedHandler(enabled: Boolean, onBack: () -> Unit) {
     }
 }
 
-@ExperimentalFoundationApi
 @Composable
 fun <T : MarvelItem> MarvelItemsList(
     loading: Boolean,

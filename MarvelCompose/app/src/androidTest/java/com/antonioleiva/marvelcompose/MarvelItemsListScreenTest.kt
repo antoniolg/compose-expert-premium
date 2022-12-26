@@ -1,7 +1,5 @@
 package com.antonioleiva.marvelcompose
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.platform.app.InstrumentationRegistry
@@ -12,8 +10,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-@ExperimentalFoundationApi
-@ExperimentalMaterialApi
 class MarvelItemsListScreenTest {
 
     @get:Rule
