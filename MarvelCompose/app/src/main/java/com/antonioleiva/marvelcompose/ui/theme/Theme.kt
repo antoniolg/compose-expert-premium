@@ -34,7 +34,7 @@ fun MarvelComposeTheme(
     MaterialTheme(
         colorScheme = colors,
         typography = Typography,
-        //shapes = Shapes,
+        shapes = Shapes,
         content = content
     )
 }
