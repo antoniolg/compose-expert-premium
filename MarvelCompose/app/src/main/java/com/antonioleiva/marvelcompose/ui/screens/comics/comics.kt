@@ -1,9 +1,11 @@
 package com.antonioleiva.marvelcompose.ui.screens.comics
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.*
+import androidx.compose.material.ScrollableTabRow
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRowDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -11,7 +13,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.antonioleiva.marvelcompose.R
 import com.antonioleiva.marvelcompose.data.entities.Comic
 import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemDetailScreen
@@ -19,9 +20,7 @@ import com.antonioleiva.marvelcompose.ui.screens.common.MarvelItemsListScreen
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 
-@ExperimentalMaterialApi
-@ExperimentalPagerApi
-@ExperimentalFoundationApi
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ComicsScreen(
     onClick: (Comic) -> Unit,
@@ -53,7 +52,7 @@ fun ComicsScreen(
 
 }
 
-@ExperimentalPagerApi
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun ComicFormatsTabRow(
     pagerState: PagerState,
@@ -96,7 +95,6 @@ private fun Comic.Format.toStringRes(): Int = when (this) {
 }
 
 
-@ExperimentalMaterialApi
 @Composable
 fun ComicDetailScreen(
     viewModel: ComicDetailViewModel = hiltViewModel()

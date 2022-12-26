@@ -10,7 +10,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,8 +24,7 @@ import com.antonioleiva.marvelcompose.data.entities.MarvelItem
 import com.antonioleiva.marvelcompose.data.entities.Result
 import kotlinx.coroutines.launch
 
-@ExperimentalMaterialApi
-@ExperimentalFoundationApi
+@OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun <T : MarvelItem> MarvelItemsListScreen(
     loading: Boolean = false,

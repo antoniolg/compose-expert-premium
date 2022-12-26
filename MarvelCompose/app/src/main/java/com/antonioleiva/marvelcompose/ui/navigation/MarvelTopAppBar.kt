@@ -1,8 +1,10 @@
-package com.antonioleiva.marvelcompose.ui.screens.common
+package com.antonioleiva.marvelcompose.ui.navigation
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.*
+import androidx.compose.material.AppBarDefaults
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color

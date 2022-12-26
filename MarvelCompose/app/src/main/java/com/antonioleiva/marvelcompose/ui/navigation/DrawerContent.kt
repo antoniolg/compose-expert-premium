@@ -5,7 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.LocalContentAlpha
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -18,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.antonioleiva.marvelcompose.ui.MarvelScreen
 
-@ExperimentalMaterialApi
 @Composable
 fun DrawerContent(
     drawerOptions: List<NavItem>,
@@ -30,8 +31,8 @@ fun DrawerContent(
             .background(
                 Brush.verticalGradient(
                     listOf(
-                        MaterialTheme.colors.primaryVariant,
-                        MaterialTheme.colors.secondary
+                        MaterialTheme.colorScheme.secondary,
+                        MaterialTheme.colorScheme.tertiary
                     )
                 )
             )
@@ -41,13 +42,13 @@ fun DrawerContent(
     Spacer(modifier = Modifier.height(16.dp))
     drawerOptions.forEachIndexed { index, navItem ->
         val selected = selectedIndex == index
-        val colors = MaterialTheme.colors
+        val colors = MaterialTheme.colorScheme
 
         val localContentColor = if (selected) colors.primary else colors.onBackground
 
         CompositionLocalProvider(
             LocalContentColor provides localContentColor,
-            LocalTextStyle provides MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Bold)
+            LocalTextStyle provides MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
         ) {
             Row(
                 modifier = Modifier
@@ -68,14 +69,13 @@ fun DrawerContent(
                 Spacer(modifier = Modifier.width(24.dp))
                 Text(
                     text = stringResource(id = navItem.title),
-                    style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Bold)
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
                 )
             }
         }
     }
 }
 
-@ExperimentalMaterialApi
 @Preview
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable

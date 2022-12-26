@@ -1,7 +1,5 @@
 package com.antonioleiva.marvelcompose.ui.navigation
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
@@ -13,11 +11,7 @@ import com.antonioleiva.marvelcompose.ui.screens.comics.ComicDetailScreen
 import com.antonioleiva.marvelcompose.ui.screens.comics.ComicsScreen
 import com.antonioleiva.marvelcompose.ui.screens.events.EventDetailScreen
 import com.antonioleiva.marvelcompose.ui.screens.events.EventsScreen
-import com.google.accompanist.pager.ExperimentalPagerApi
 
-@ExperimentalPagerApi
-@ExperimentalMaterialApi
-@ExperimentalFoundationApi
 @Composable
 fun Navigation(navController: NavHostController) {
 
@@ -32,8 +26,6 @@ fun Navigation(navController: NavHostController) {
     }
 }
 
-@ExperimentalMaterialApi
-@ExperimentalFoundationApi
 private fun NavGraphBuilder.charactersNav(navController: NavController) {
     navigation(
         startDestination = NavCommand.ContentType(Feature.CHARACTERS).route,
@@ -55,9 +47,6 @@ private fun NavGraphBuilder.charactersNav(navController: NavController) {
     }
 }
 
-@ExperimentalPagerApi
-@ExperimentalMaterialApi
-@ExperimentalFoundationApi
 private fun NavGraphBuilder.comicsNav(navController: NavController) {
     navigation(
         startDestination = NavCommand.ContentType(Feature.COMICS).route,
@@ -79,8 +68,6 @@ private fun NavGraphBuilder.comicsNav(navController: NavController) {
     }
 }
 
-@ExperimentalMaterialApi
-@ExperimentalFoundationApi
 private fun NavGraphBuilder.eventsNav(navController: NavController) {
     navigation(
         startDestination = NavCommand.ContentType(Feature.EVENTS).route,

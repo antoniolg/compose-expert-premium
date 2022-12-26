@@ -1,9 +1,9 @@
 package com.antonioleiva.marvelcompose.ui.screens.common
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,7 +33,7 @@ fun <T : MarvelItem> MarvelItemBottomPreview(item: T?, onGoToDetail: (T) -> Unit
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text(text = item.title, style = MaterialTheme.typography.h6)
+                Text(text = item.title, style = MaterialTheme.typography.titleLarge)
                 Text(text = item.description)
                 Button(
                     onClick = { onGoToDetail(item) },

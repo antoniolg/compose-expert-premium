@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.Composable
@@ -35,12 +35,12 @@ fun ErrorMessage(error: Error) {
             imageVector = Icons.Default.Warning,
             contentDescription = message,
             modifier = Modifier.size(128.dp),
-            tint = MaterialTheme.colors.error
+            tint = MaterialTheme.colorScheme.error
         )
         Text(
             text = message,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.h4
+            style = MaterialTheme.typography.headlineMedium
         )
     }
 }
