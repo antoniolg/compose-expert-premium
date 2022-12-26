@@ -2,25 +2,16 @@ package com.antonioleiva.marvelcompose.ui.screens.common
 
 import android.content.Context
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.FabPosition
-import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ShareCompat
 import com.antonioleiva.marvelcompose.data.entities.MarvelItem
 import com.antonioleiva.marvelcompose.data.entities.Url
-import com.antonioleiva.marvelcompose.ui.navigation.AppBarIcon
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MarvelItemDetailScaffold(
     marvelItem: MarvelItem,
@@ -36,17 +27,6 @@ fun MarvelItemDetailScaffold(
                 ) {
                     Icon(imageVector = Icons.Default.Share, contentDescription = null)
                 }
-            }
-        },
-        floatingActionButtonPosition = FabPosition.Center,
-        isFloatingActionButtonDocked = true,
-        bottomBar = {
-            BottomAppBar(
-                cutoutShape = CircleShape
-            ) {
-                AppBarIcon(imageVector = Icons.Default.Menu, onClick = { })
-                Spacer(modifier = Modifier.weight(1f))
-                AppBarIcon(imageVector = Icons.Default.Favorite, onClick = { })
             }
         },
         content = content
