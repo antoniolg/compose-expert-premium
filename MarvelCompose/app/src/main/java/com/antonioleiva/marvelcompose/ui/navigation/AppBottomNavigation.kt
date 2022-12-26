@@ -1,7 +1,7 @@
 package com.antonioleiva.marvelcompose.ui.navigation
 
-import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
@@ -15,7 +15,7 @@ fun AppBottomNavigation(
     MarvelBottomNavigation {
         bottomNavOptions.forEach { item ->
             val title = stringResource(item.title)
-            BottomNavigationItem(
+            NavigationBarItem(
                 selected = currentRoute.contains(item.navCommand.feature.route),
                 icon = {
                     Icon(
