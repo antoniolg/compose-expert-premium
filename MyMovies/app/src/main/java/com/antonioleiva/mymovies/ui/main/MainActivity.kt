@@ -47,6 +47,10 @@ class MainActivity : AppCompatActivity() {
             UiModel.RequestLocationPermission -> coarsePermissionRequester.request {
                 viewModel.onCoarsePermissionRequested()
             }
+
+            UiModel.Loading -> {
+                // Nothing needs to be done, as it's done in the first line of this function
+            }
         }
     }
 }
